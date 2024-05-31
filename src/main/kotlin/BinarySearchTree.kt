@@ -2,11 +2,11 @@ open class BinarySearchTree<T : Comparable<T>> {
     private var root: Node<T>? = null
 
     // Вставка узла
-    open fun add(key: T, value: T) {
+    open suspend fun add(key: T, value: T) {
         root = add(root, key, value)
     }
 
-    open fun add(key: T) {
+    open suspend fun add(key: T) {
         add(key, key)
     }
 
@@ -31,7 +31,7 @@ open class BinarySearchTree<T : Comparable<T>> {
     }
 
     // Удаление узла
-    open fun delete(key: T) {
+    open suspend fun delete(key: T) {
         root = delete(root, key)
     }
 
@@ -69,7 +69,7 @@ open class BinarySearchTree<T : Comparable<T>> {
     }
 
     // Поиск узла
-    open fun search(key: T): Any? {
+    open suspend fun search(key: T): Any? {
         return search(root, key)
     }
 

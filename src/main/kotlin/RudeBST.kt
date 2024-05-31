@@ -1,31 +1,36 @@
+import kotlinx.coroutines.sync.Mutex
+
 class RudeBST<T : Comparable<T>> : BinarySearchTree<T>() {
-    private val lock = Any()
+    //private val lock = Any()
 
     private var root: Node<T>? = null
 
+    private val treeMutex = Mutex()
+
     // Вставка узла
-    override fun add(key: T, value: T) {
-        synchronized(lock) {
-            root = add(root, key, value)
-        }
+    override suspend fun add(key: T, value: T) {
+        treeMutex.lock()
+        root = add(root, key, value)
+        treeMutex.unlock()
     }
 
-    override fun add(key: T){
+    override suspend fun add(key: T){
         add(key, key)
     }
 
     // Удаление узла
-    override fun delete(key: T) {
-        synchronized(lock) {
-            root = delete(root, key)
-        }
+    override suspend fun delete(key: T) {
+        treeMutex.lock()
+        root = delete(root, key)
+        treeMutex.unlock()
     }
 
     // Поиск узла
-    override fun search(key: T): Any? {
-        synchronized(lock) {
-            return search(root, key)
-        }
+    override suspend fun search(key: T): Any? {
+        treeMutex.lock()
+        val res = search(root, key)
+        treeMutex.unlock()
+        return res
     }
 
     override fun printTree() {
