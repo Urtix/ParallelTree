@@ -26,7 +26,7 @@ open class ThinBST<T : Comparable<T>> {
             NodeMutex(key, value, parent)
         } else {
             when {
-                value < node.value -> {
+                key < node.key -> {
                     if (node.left != null) {
                         node.left?.lock()
                         node.unlock()
@@ -37,7 +37,7 @@ open class ThinBST<T : Comparable<T>> {
                     }
                     node
                 }
-                value > node.value -> {
+                key > node.key -> {
                     if (node.right != null) {
                         node.right?.lock()
                         node.unlock()
@@ -58,9 +58,10 @@ open class ThinBST<T : Comparable<T>> {
 
     // Удаление узла
     open suspend fun delete(key: T) {
-        Mutex().lock()
+        treeMutex.lock()
         if (root != null) {
             root?.lock()
+            treeMutex.unlock()
             root = thinDelete(root, key)
         }
     }
