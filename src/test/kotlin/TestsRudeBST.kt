@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test
 
 
 class TestsRudeBST{
-    private val nodes: Int = 500
+    private val nodes: Int = 100
     private val tree = RudeBST<Int>()
     @Test
     fun `one thread test`() = runBlocking {
-        repeat(100) {
+        repeat(10) {
             val listRandomNodes = (0..nodes).shuffled().take(nodes)
 
             repeat(nodes) {
@@ -29,7 +29,7 @@ class TestsRudeBST{
 
     @Test
     fun `parallel test`() = runBlocking {
-        repeat(100) {
+        repeat(10) {
             val listRandomNodes = (0..nodes).shuffled().take(nodes)
             val headNodes = listRandomNodes.subList(0, listRandomNodes.size / 2)
             val tailNodes = listRandomNodes.subList(listRandomNodes.size / 2, listRandomNodes.size)

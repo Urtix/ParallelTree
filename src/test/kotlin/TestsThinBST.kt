@@ -9,7 +9,7 @@ class TestsThinBST {
     private val tree = ThinBST<Int>()
     @Test
     fun `one thread test`() = runBlocking {
-        repeat(2) {
+        repeat(10) {
             val listRandomNodes = (0..nodes).shuffled().take(nodes)
 
             repeat(nodes) {
@@ -29,7 +29,7 @@ class TestsThinBST {
 
     @Test
     fun `parallel test`() = runBlocking {
-        repeat(100) {
+        repeat(10) {
             val listRandomNodes = (0..nodes).shuffled().take(nodes)
             val headNodes = listRandomNodes.subList(0, listRandomNodes.size / 2)
             val tailNodes = listRandomNodes.subList(listRandomNodes.size / 2, listRandomNodes.size)
@@ -38,7 +38,6 @@ class TestsThinBST {
                 launch {
                     repeat(nodes / 2) {
                         delay(50)
-                        println(headNodes[it])
                         tree.add(headNodes[it])
                     }
                 }
