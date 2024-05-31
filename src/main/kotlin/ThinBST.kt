@@ -29,9 +29,8 @@ open class ThinBST<T : Comparable<T>> {
                         node.unlock()
                         node.left = add(node.left, key, value, node)
                     } else {
-                        node.unlock()
-                        node.left?.lock()
                         node.left = NodeMutex(key, value, parent)
+                        node.unlock()
                     }
                     node
                 }
@@ -41,9 +40,8 @@ open class ThinBST<T : Comparable<T>> {
                         node.unlock()
                         node.right = add(node.right, key, value, node)
                     } else {
-                        node.unlock()
-                        node.right?.lock()
                         node.right = NodeMutex(key, value, parent)
+                        node.unlock()
                     }
                     node
                 }
@@ -87,8 +85,8 @@ open class ThinBST<T : Comparable<T>> {
                         }
                         node.key = successor!!.key
                         node.value = successor.value
-                        node.unlock()
                         node.right = thinDelete(node.right, successor.key)
+                        node.unlock()
                         return node
                     }
                 }

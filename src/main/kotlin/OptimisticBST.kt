@@ -25,7 +25,7 @@ open class OptimisticBST<T : Comparable<T>> : ThinBST<T>()  {
                         node.lock()
                         node.parent?.lock()
                         val newNode = doubleSearch(root, node.value)
-                        if ((newNode == node) && (newNode.parent == node.parent)) {
+                        if (newNode == node) {
                             node.left = NodeMutex(key, value, parent)
                             node.unlock()
                             node.parent?.unlock()
@@ -44,7 +44,7 @@ open class OptimisticBST<T : Comparable<T>> : ThinBST<T>()  {
                         node.lock()
                         node.parent?.lock()
                         val newNode = doubleSearch(root, node.value)
-                        if ((newNode == node) && (newNode.parent == node.parent)) {
+                        if (newNode == node) {
                             node.right = NodeMutex(value, key, parent)
                             node.unlock()
                             node.parent?.unlock()
@@ -78,7 +78,7 @@ open class OptimisticBST<T : Comparable<T>> : ThinBST<T>()  {
                 node.parent?.lock()
                 node.lock()
                 val newNode = doubleSearch(root, node.key)
-                if ((newNode == node) && (newNode.parent == node.parent)) {
+                if (newNode == node) {
                     return when {
                         node.left == null -> {
                             node.parent?.unlock()
@@ -135,7 +135,7 @@ open class OptimisticBST<T : Comparable<T>> : ThinBST<T>()  {
                     node.parent?.lock()
                     node.lock()
                     val newNode = doubleSearch(root, key)
-                    if ((newNode == node) && (newNode.parent == node.parent)) {
+                    if (newNode == node) {
                         node.unlock()
                         node.parent?.unlock()
                         return node.value

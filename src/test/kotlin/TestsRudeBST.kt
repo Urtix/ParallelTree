@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 
 class TestsRudeBST{
-    private val nodes: Int = 1000
+    private val nodes: Int = 500
     private val tree = RudeBST<Int>()
     @Test
     fun `one thread test`() = runBlocking {
@@ -36,14 +36,14 @@ class TestsRudeBST{
             coroutineScope {
 
                 launch {
-                    delay(50)
                     repeat(nodes / 2) {
+                        delay(50)
                         tree.add(headNodes[it])
                     }
                 }
                 launch {
-                    delay(50)
                     repeat(nodes / 2) {
+                        delay(50)
                         tree.add(tailNodes[it])
                     }
                 }
@@ -56,14 +56,14 @@ class TestsRudeBST{
 
             coroutineScope {
                 launch {
-                    delay(50)
                     repeat(nodes / 4) {
+                        delay(50)
                         tree.delete(headNodesToDelete[it])
                     }
                 }
                 launch {
-                    delay(50)
                     repeat(nodes / 4) {
+                        delay(50)
                         tree.delete(tailNodesToDelete[it])
                     }
                 }

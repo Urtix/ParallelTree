@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestsOptimisticBST" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-05-24T01:42:16" hostname="LAPTOP-4GT1SVLV" time="11.516">
-  <properties/>
-  <testcase name="one thread test()" classname="TestsOptimisticBST" time="0.802"/>
-  <testcase name="parallel test()" classname="TestsOptimisticBST" time="10.713"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

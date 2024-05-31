@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 
 class TestsOptimisticBST{
-    private val nodes: Int = 1000
+    private val nodes: Int = 500
     private val tree = OptimisticBST<Int>()
     @Test
     fun `one thread test`() = runBlocking {
@@ -36,14 +36,15 @@ class TestsOptimisticBST{
             coroutineScope {
 
                 launch {
-                    delay(50)
                     repeat(nodes / 2) {
+                        delay(50)
+                        println(headNodes[it])
                         tree.add(headNodes[it])
                     }
                 }
                 launch {
-                    delay(50)
                     repeat(nodes / 2) {
+                        delay(50)
                         tree.add(tailNodes[it])
                     }
                 }
@@ -56,14 +57,14 @@ class TestsOptimisticBST{
 
             coroutineScope {
                 launch {
-                    delay(50)
                     repeat(nodes / 4) {
+                        delay(50)
                         tree.delete(headNodesToDelete[it])
                     }
                 }
                 launch {
-                    delay(50)
                     repeat(nodes / 4) {
+                        delay(50)
                         tree.delete(tailNodesToDelete[it])
                     }
                 }

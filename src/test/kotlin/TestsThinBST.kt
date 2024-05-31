@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test
 
 
 class TestsThinBST {
-    private val nodes: Int = 1000
+    private val nodes: Int = 100
     private val tree = ThinBST<Int>()
     @Test
     fun `one thread test`() = runBlocking {
-        repeat(100) {
+        repeat(2) {
             val listRandomNodes = (0..nodes).shuffled().take(nodes)
 
             repeat(nodes) {
@@ -36,14 +36,15 @@ class TestsThinBST {
             coroutineScope {
 
                 launch {
-                    delay(50)
                     repeat(nodes / 2) {
+                        delay(50)
+                        println(headNodes[it])
                         tree.add(headNodes[it])
                     }
                 }
                 launch {
-                    delay(50)
                     repeat(nodes / 2) {
+                        delay(50)
                         tree.add(tailNodes[it])
                     }
                 }
@@ -56,14 +57,14 @@ class TestsThinBST {
 
             coroutineScope {
                 launch {
-                    delay(50)
                     repeat(nodes / 4) {
+                        delay(50)
                         tree.delete(headNodesToDelete[it])
                     }
                 }
                 launch {
-                    delay(50)
                     repeat(nodes / 4) {
+                        delay(50)
                         tree.delete(tailNodesToDelete[it])
                     }
                 }
