@@ -13,6 +13,7 @@ class TestsThinBST {
             val listRandomNodes = (0..nodes).shuffled().take(nodes)
 
             repeat(nodes) {
+                println(listRandomNodes[it])
                 tree.add(listRandomNodes[it])
             }
 

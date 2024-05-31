@@ -143,7 +143,7 @@ open class OptimisticBST<T : Comparable<T>> : ThinBST<T>()  {
                         search(root, key)
                     }
                 }
-                key < node.value -> search(node.left, key)
+                key < node.key -> search(node.left, key)
                 else -> search(node.right, key)
             }
         }

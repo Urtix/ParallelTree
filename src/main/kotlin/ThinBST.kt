@@ -2,14 +2,17 @@ import kotlinx.coroutines.sync.Mutex
 
 open class ThinBST<T : Comparable<T>> {
     private var root: NodeMutex<T>? = null
+    private val treeMutex = Mutex()
 
     // Вставка узла
     open suspend fun add(key: T, value: T) {
-        Mutex().lock()
+        treeMutex.lock()
         root = if (root != null) {
             root?.lock()
+            treeMutex.unlock()
             add(root, key, value, null)
         } else {
+            treeMutex.unlock()
             NodeMutex(key, value, null)
         }
     }
